@@ -1,0 +1,70 @@
+
+/* Navbar */
+.icon{
+    padding-right:8px !important;
+    padding:2px;
+  }
+  
+  .btn{
+    background: transparent;
+    transition: transform 0.3s ease;
+  }
+  .btn:hover{
+    background: #fff !important;
+    color:#3f51b5 !important;
+  }
+  
+  .navbar-nav a{
+    font-size: 18px;
+  }
+  
+  .searchBar{
+    align-items: center;
+    display: flex;
+    height: 35px;
+    width: 35px;
+    border: 0;
+  }
+  
+  .search-input{
+    border: none; 
+    padding: 8px 12px;
+    width: 500px !important;
+    border-radius: 3px 0px 0px 3px;
+    background-color: #ffffff;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+  }
+  .search-input:focus{
+    outline: none;
+  }
+  
+  .search-icon{
+    background-color: #838383;
+    height:24px !important;
+    align-items: center;
+    color:#fff;
+    margin: 0 0 0 -10px;
+    cursor: pointer;
+    padding: 7px;
+    border-radius: 0px 3px 3px 0px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  
+  }
+  
+  .modal-input{
+    margin:10px 0px 20px 0px !important;
+    padding:10px 5px;
+  }
+  
+  .modal-btn{
+    text-align:center!important ;
+    background-color: #3f51b5 !important;
+    height:55px;
+  }
+  
+  .register-modal-input{
+    margin:0px 0px 10px 0px !important;
+    padding:0px 0px !important;
+    height:55px !important;
+  }

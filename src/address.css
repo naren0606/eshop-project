@@ -1,0 +1,13 @@
+.address{
+    margin:30px;
+    display: flex;
+    flex-direction: column;
+}  
+
+.address-form{
+    margin-top:25px;
+}
+
+.form-input{
+    margin:5px !important;
+}

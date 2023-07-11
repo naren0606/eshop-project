@@ -1,0 +1,13 @@
+.stepper{
+margin-top: 35px;
+}
+
+.input{
+ margin:10px 10px 10px 0px !important;
+}
+
+.save-btn{
+padding: 10px 20px !important;
+margin:10px 20px !important;
+background: #232F3E !important;
+}

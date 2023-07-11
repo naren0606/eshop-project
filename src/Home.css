@@ -1,0 +1,20 @@
+.hero-img{
+  border-radius: 0%;
+  width:100%;
+  height:555px;
+  }
+
+.container{
+position: absolute;
+  }
+
+.hero h1{
+ margin:90px 0px 0px 40px;
+ color:#fff;
+ font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+.hero span{
+ display: flex;
+ position: absolute;
+}
