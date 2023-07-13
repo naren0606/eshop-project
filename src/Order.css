@@ -1,5 +1,5 @@
-.stepper{
-margin-top: 35px;
+.create-order{
+    margin: 35px;
 }
 
 .input{
@@ -8,6 +8,6 @@ margin-top: 35px;
 
 .save-btn{
 padding: 10px 20px !important;
-margin:10px 20px !important;
+margin:20px 20px 20px  0px !important;
 background: #232F3E !important;
 }

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, MenuItem, Alert, Typography } from '@mui/material';
+import { TextField, Button, MenuItem, Alert, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import '../address.css';
 
-
-const Address = () => {
+const Address = ({onChangeAddress}) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
   const [addresses, setAddresses] = useState([]);
   const [showForm, setShowForm] = useState(false);
@@ -22,7 +21,7 @@ const Address = () => {
   useEffect(() => {
     if (isAuthenticated) {
       fetchAddresses();
-    }
+    } 
   }, [isAuthenticated]);
 
   const fetchAddresses = async () => {
@@ -60,10 +59,6 @@ const Address = () => {
     try {
       if (isAuthenticated) {
         const token = localStorage.getItem('x-auth-token');
-        if (!selectedAddress) {
-          alert('Please select an address from the saved addresses.');
-          return;
-        }
 
         if (selectedAddress) {
           await axios.put(`http://localhost:3001/api/v1/addresses/${selectedAddress}`, address, {
@@ -114,8 +109,12 @@ const Address = () => {
     });
   };
 
-  if (!isAuthenticated) {
-    return <Alert severity="info">Please login first to access this page.</Alert>;
+ if (!isAuthenticated) {
+    return (
+      <Box className='alert-box'>
+        <Alert severity="error">Please login first to access this page.</Alert>
+      </Box>
+    );
   }
 
   return (

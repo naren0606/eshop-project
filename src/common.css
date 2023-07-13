@@ -2,11 +2,13 @@
 /* Navbar */
 .icon{
     padding-right:8px !important;
-    padding:2px;
   }
   
   .btn{
     background: transparent;
+    padding:10px 15px !important;
+    margin:10px !important;
+    border-radius: 40px !important;
     transition: transform 0.3s ease;
   }
   .btn:hover{
@@ -22,18 +24,19 @@
     align-items: center;
     display: flex;
     height: 35px;
-    width: 35px;
+    width: 250px;
     border: 0;
   }
   
   .search-input{
     border: none; 
-    padding: 8px 12px;
-    width: 500px !important;
-    border-radius: 3px 0px 0px 3px;
+    padding: 21px 12px;
+    width: 280px !important;
+    border-radius: 50px;
     background-color: #ffffff;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     font-size: 18px;
+    height:28px !important;
   }
   .search-input:focus{
     outline: none;
@@ -41,13 +44,13 @@
   
   .search-icon{
     background-color: #838383;
-    height:24px !important;
+    height:28px !important;
     align-items: center;
     color:#fff;
-    margin: 0 0 0 -10px;
+    margin: 0 0 0 -43px;
     cursor: pointer;
     padding: 7px;
-    border-radius: 0px 3px 3px 0px;
+    border-radius: 50%;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
   
   }
@@ -64,7 +67,7 @@
   }
   
   .register-modal-input{
-    margin:0px 0px 10px 0px !important;
+    margin:5px 0px 10px 0px !important;
     padding:0px 0px !important;
     height:55px !important;
   }

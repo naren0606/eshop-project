@@ -10,10 +10,12 @@ import {useNavigate} from "react-router-dom"
 
 import '../ProductDetails.css';
 
-const ProductDetails = ({ addToCart }) => {
+const ProductDetails = () => {
   const { productId } = useParams();
   const [product, setProduct] = useState({});
   const navigate = useNavigate();
+  const [quantity, setQuantity] = useState(1);
+
 
   useEffect(() => {
     // Fetch the product details based on the productId
@@ -29,35 +31,24 @@ const ProductDetails = ({ addToCart }) => {
       console.error('Error fetching product details:', error);
     }
   };
+  
+  
+  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const handleAddToCart = () => {
-    if (quantity > product.availableItems) {
-      alert('Please select a quantity less than or equal to the available items.');
-      return;
-    }
-  
-    const productDetails = {
-      _id: productId,
-      name: product.name,
-      image: product.image,
-      price: product.price,
-      quantity: quantity,
-    };
-  
-    addToCart(productDetails);
-    alert('Your order is confirmed.');
+    const cart = [
+      {
+        _id: productId,
+        name: product.name,
+        image: product.image,
+        price: product.price,
+      },
+    ];
+
+    navigate('/place-order', { state: { cart, product } });
   };
-  
 
 
-  const [quantity, setQuantity] = useState(1);
-
-  const handleQuantityChange = (event) => {
-    const newQuantity = parseInt(event.target.value);
-    if (!isNaN(newQuantity) && newQuantity >= 1) {
-      setQuantity(newQuantity);
-    }
-  };
 
   
 
@@ -101,17 +92,18 @@ const ProductDetails = ({ addToCart }) => {
                     <div className="quantity-input">
                       <h6 style={{ fontSize: '15px', margin: ' 5px 0px 10px 0px' }}>Add Quantity:</h6>
                       <TextField
-                        label="Quantity"
-                        type="number"
-                        value={quantity}
-                        onChange={handleQuantityChange}
-                      />
+                  label="Quantity"
+                  type="number"
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                />
                       
                       
                     </div>
-                    <Button  onClick={() => {handleAddToCart(); navigate("/place-order");}} className="place-order-btn">
-        Place Order
-      </Button>
+                    <Button onClick={() => handleAddToCart(product.quantity || 1)} className="place-order-btn">
+  Place Order
+</Button>
+
                 </Box>
               </Card>
             </Grid>

@@ -25,6 +25,7 @@ const Login = ({ isOpen, onClose }) => {
         const token = res.headers['x-auth-token']; // Get the token from the response header
         localStorage.setItem('x-auth-token', token);
         localStorage.setItem('isAuthenticated', true);
+        localStorage.setItem('userEmail', 'komal@gmail.com'); // Replace with the email of the user you want to make an admin
       })
       .catch((err) => {
         console.log(err);

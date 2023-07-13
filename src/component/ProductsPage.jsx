@@ -10,43 +10,50 @@ import { Alert } from '@mui/material';
 
 
 
+
 import '../ProductsPage.css';
 
 const ProductsPage = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
-  const location = useLocation();
   const navigate=useNavigate();
+  const location=useLocation();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortingOption, setSortingOption] = useState('default');
   const [loading, setLoading] = useState(true);
+const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     // Fetch the products data
     fetch('http://localhost:3001/api/v1/products')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setProducts(data);
         setTimeout(() => {
-          setLoading(false)
-        }, 1000)      
+          setLoading(false);
+        }, 1000);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching products:', error);
         setLoading(true);
       });
   
     // Fetch the categories data
     fetch('http://localhost:3001/api/v1/products/categories')
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setCategories(data);
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error fetching categories:', error);
       });
+  
+  
   }, []);
+
+  
+  
   
 
   const handleCategoryChange = (category) => {
@@ -99,10 +106,20 @@ const ProductsPage = () => {
     }
   };
 
+
+ 
   if (!isAuthenticated) {
-    navigate("/");
-    return <Alert severity="info">Please login first to access this page.</Alert>;
+    setTimeout(() => {
+      navigate('/');
+    }, 2000); // Delay of 2 seconds
+  
+    return (
+      <Box className='alert-box'>
+        <Alert severity="error">Please login first to access this page.</Alert>
+      </Box>
+    );
   }
+  
   
 
   return (

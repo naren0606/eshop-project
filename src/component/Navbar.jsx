@@ -16,7 +16,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from './Login';
 
-const Navbar = ({ isAdmin }) => {
+const Navbar = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
   const [openModal, setOpenModal] = useState(false);
   const [openRegisterModal, setOpenRegisterModal] = useState(false);
@@ -27,10 +27,15 @@ const Navbar = ({ isAdmin }) => {
   const navigate = useNavigate();
   const [contactNumber, setContactNumber] = useState('');
   const location = useLocation();
-  const [searchQuery, setSearchQuery] = useState('');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+
   
+  const isAdmin = () => {
+    // Logic to determine admin status based on user's role or other authentication data
+    return false; // Return true or false based on the admin status
+  };
   
 
   const handleOpenModal = () => {
@@ -76,26 +81,32 @@ const Navbar = ({ isAdmin }) => {
       });
   };
 
+  const handleSearchInputChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+
   const handleLogout = () => {
     localStorage.setItem('isAuthenticated', 'false');
     navigate('/');
   };
   
   
-
-  const handleSearch = () => {
-    const trimmedQuery = searchQuery.trim();
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const trimmedQuery = searchQuery.trim().toLowerCase();
     if (trimmedQuery !== '') {
-      if (location.pathname === '/products') {
-        const filteredProducts = products.filter((product) =>
-          product.name.toLowerCase().includes(trimmedQuery.toLowerCase())
-        );
-        setFilteredProducts(filteredProducts);
-      } else {
-        navigate('/products', { state: { searchQuery: trimmedQuery } });
-      }
+      const filteredProducts = products.filter((product) =>
+        product.name.toLowerCase().includes(trimmedQuery)
+      );
+      setFilteredProducts(filteredProducts);
+    } else {
+      setFilteredProducts([]);
     }
   };
+  
+  
+  
 
   return (
     <AppBar position="static" color="primary" style={{ zIndex: 999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', backgroundColor: '#3f51b5' }}>
@@ -104,7 +115,7 @@ const Navbar = ({ isAdmin }) => {
           <b>upGrad</b>
         </Typography>
 
-        {isAdmin && isAuthenticated && (
+        {isAdmin() && isAuthenticated && (
           <React.Fragment>
             <div>
               <Link to="/">
@@ -122,6 +133,18 @@ const Navbar = ({ isAdmin }) => {
                 <Button color="#fff" className="btn">
                   Add Products
                 </Button>
+                <form onSubmit={handleSearch} className="searchBar">
+  <input
+    type="search"
+    placeholder="Search"
+    aria-label="Search"
+    value={searchQuery}
+    onChange={handleSearchInputChange}
+    className="search-input"
+  />
+  <SearchIcon type="submit" className="search-icon" />
+</form>
+
               </Link>
             </div>
           </React.Fragment>
@@ -141,23 +164,18 @@ const Navbar = ({ isAdmin }) => {
                   Products
                 </Button>
               </Link>
-              <Link to="/address">
-                <Button color="inherit" className="btn" style={{ color: '#fff' }}>
-                  Address
-                </Button>
-              </Link>
               <form onSubmit={handleSearch} className="searchBar">
-                <input
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                />
-                <button type="submit" className="search-icon">
-                  search
-                </button>
-              </form>
+  <input
+    type="search"
+    placeholder="Search"
+    aria-label="Search"
+    value={searchQuery}
+    onChange={handleSearchInputChange}
+    className="search-input"
+  />
+  <SearchIcon type="submit" className="search-icon" />
+</form>
+
             </React.Fragment>
           )}
         </Stack>
@@ -212,21 +230,15 @@ const Navbar = ({ isAdmin }) => {
                   <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth className="register-modal-input" />
                   <TextField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type="password" className="register-modal-input" inputProps={{ minLength: 8, pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$' }} />
                   <TextField label="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} fullWidth className="register-modal-input" />
-                  <Button variant="contained" sx={{ mt: 2 }} fullWidth onClick={handleRegister}>
+                  <Button variant="contained" sx={{ mt: 3 }} style={{height:'55px', fontSize:'20px'}} fullWidth onClick={handleRegister}>
                     Sign Up
                   </Button>
-                  <Typography sx={{ mt: 2 }}>
-                    Already have an account?{' '}
-                    <Button onClick={handleOpenModal} color="inherit" style={{ textDecoration: 'underline', cursor: 'pointer' }}>
-                      Login
-                    </Button>
-                  </Typography>
                 </Box>
               </Modal>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {!isAdmin && (
+              {!isAdmin() && (
                 <Link to="/cart">
                   <Button color="inherit" className="btn" style={{ color: '#fff' }}>
                     <ShoppingCartIcon fontSize="medium" className="icon" />
