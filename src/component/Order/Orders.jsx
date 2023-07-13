@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { TextField, Button, MenuItem, Alert, Typography, Box,Stepper, Step, StepLabel,Card, CardContent} from '@mui/material';
-import '../address.css';
 import { useLocation } from 'react-router-dom';
-import '../Cart.css'
-import '../Order.css';
+import './Order.css';
 
 const CreateOrderPage = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -26,7 +24,6 @@ const CreateOrderPage = () => {
     zipCode: '',
   });
 
-  const [cart, setCart] = useState([]);
   const [product, setProduct] = useState(null);
 
 
@@ -131,13 +128,7 @@ const CreateOrderPage = () => {
 
 
 
-  const calculateTotalCartValue = () => {
-    let total = 0;
-    for (const item of cart) {
-      total += item.price * item.quantity;
-    }
-    return total.toFixed(2);
-  };
+
 
 
   if (!isAuthenticated) {
@@ -181,7 +172,7 @@ const CreateOrderPage = () => {
       }
   
       const orderData = {
-        product: productId,
+        product: productId, // Add the productId to the orderData
         address: selectedAddress,
       };
   
@@ -199,6 +190,7 @@ const CreateOrderPage = () => {
       // Handle the error and display an appropriate message to the user
     }
   };
+  
   
   
 
@@ -226,6 +218,7 @@ const CreateOrderPage = () => {
                 <Typography variant="h6" component="div">
                   {product.name}
                 </Typography>
+                
                 <Typography variant="h6" component="div">
                   {productId}
                 </Typography>
@@ -234,16 +227,10 @@ const CreateOrderPage = () => {
                 </Typography>
               </CardContent>
               <CardContent className="card-content">
-                <Typography variant="body2" color="text.secondary">
-                  Quantity:
-                </Typography>
-                <Typography variant="body2" color="black" align="right" margin="10px auto auto auto">
-                  Sub-total: ₹{(product.price * product.quantity).toFixed(2)}
-                </Typography>
+               
               </CardContent>
             </div>
           </Card>
-          <h3 style={{ margin: '20px 35px' }}>Total Cart Value: ₹ {calculateTotalCartValue()}</h3>
         </div>
       )}
 
@@ -349,6 +336,7 @@ const CreateOrderPage = () => {
 {activeStep === 2 && (
   <>
   <div className="main">
+  <Typography variant="h6">Review Product:</Typography>
   <Card className="cart-card" key={product._id}>
     <Card className="cart-image">
       <img src={product.image} alt={product.name} width="100%" className="image" />
@@ -363,17 +351,14 @@ const CreateOrderPage = () => {
         </Typography>
       </CardContent>
       <CardContent className="card-content">
-        <Typography variant="body2" color="text.secondary">
-          Quantity:
-        </Typography>
+       
         <Typography variant="body2" color="black" align="right" margin="10px auto auto auto">
-          Sub-total: ₹{(product.price * product.quantity).toFixed(2)}
         </Typography>
       </CardContent>
     </div>
   </Card>
-  <h3 style={{ margin: '20px 35px' }}>Total Cart Value: ₹ {calculateTotalCartValue()}</h3>
 </div>
+<hr/>
   <div>
     <Typography variant="h6">Address:</Typography>
     {addresses.map((addr) => {

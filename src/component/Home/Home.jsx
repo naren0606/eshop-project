@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import '../Home.css';
+import './Home.css';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,7 +26,7 @@ const Home = () => {
         <Slide index={0}>
           <div className="card text-bg-dark border-0">
             <img
-              src={require('../background.jpg')}
+              src={require('./background.jpg')}
               className="card-img hero-img"
               alt="Background"
             />
@@ -35,7 +35,7 @@ const Home = () => {
         <Slide index={1}>
           <div className="card text-bg-dark border-0">
             <img
-              src={require('../background1.jpg')}
+              src={require('./background1.jpg')}
               className="card-img hero-img"
               alt="Background"
             />
@@ -44,7 +44,7 @@ const Home = () => {
         <Slide index={2}>
           <div className="card text-bg-dark border-0">
             <img
-              src={require('../background2.jpg')}
+              src={require('./background2.jpg')}
               className="card-img hero-img"
               alt="Background"
             />
@@ -53,7 +53,7 @@ const Home = () => {
         <Slide index={3}>
           <div className="card text-bg-dark border-0">
             <img
-              src={require('../background3.jpg')}
+              src={require('./background3.jpg')}
               className="card-img hero-img"
               alt="Background"
             />

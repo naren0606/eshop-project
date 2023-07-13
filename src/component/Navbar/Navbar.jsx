@@ -11,10 +11,10 @@ import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
 import { Modal, Box, Typography, TextField, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import '../common.css';
+import './Navbar.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Login from './Login';
+import Login from '../Login/Login';
 
 const Navbar = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;

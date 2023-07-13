@@ -11,7 +11,7 @@ import { Alert } from '@mui/material';
 
 
 
-import '../ProductsPage.css';
+import './ProductsPage.css';
 
 const ProductsPage = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;

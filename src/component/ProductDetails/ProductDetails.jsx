@@ -8,7 +8,7 @@ import TextField from '@mui/material/TextField';
 import {useNavigate} from "react-router-dom"
 
 
-import '../ProductDetails.css';
+import './ProductDetails.css';
 
 const ProductDetails = () => {
   const { productId } = useParams();
@@ -33,7 +33,6 @@ const ProductDetails = () => {
   };
   
   
-  const [selectedQuantity, setSelectedQuantity] = useState(1);
 
   const handleAddToCart = () => {
     const cart = [
