@@ -31,12 +31,12 @@ const Navbar = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
 
-  
+
   const isAdmin = () => {
     // Logic to determine admin status based on user's role or other authentication data
     return false; // Return true or false based on the admin status
   };
-  
+
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -90,8 +90,8 @@ const Navbar = () => {
     localStorage.setItem('isAuthenticated', 'false');
     navigate('/');
   };
-  
-  
+
+
   const handleSearch = (event) => {
     event.preventDefault();
     const trimmedQuery = searchQuery.trim().toLowerCase();
@@ -104,9 +104,9 @@ const Navbar = () => {
       setFilteredProducts([]);
     }
   };
-  
-  
-  
+
+
+
 
   return (
     <AppBar position="static" color="primary" style={{ zIndex: 999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', backgroundColor: '#3f51b5' }}>
@@ -134,16 +134,16 @@ const Navbar = () => {
                   Add Products
                 </Button>
                 <form onSubmit={handleSearch} className="searchBar">
-  <input
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    value={searchQuery}
-    onChange={handleSearchInputChange}
-    className="search-input"
-  />
-  <SearchIcon type="submit" className="search-icon" />
-</form>
+                  <input
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                    value={searchQuery}
+                    onChange={handleSearchInputChange}
+                    className="search-input"
+                  />
+                  <SearchIcon type="submit" className="search-icon" />
+                </form>
 
               </Link>
             </div>
@@ -165,16 +165,16 @@ const Navbar = () => {
                 </Button>
               </Link>
               <form onSubmit={handleSearch} className="searchBar">
-  <input
-    type="search"
-    placeholder="Search"
-    aria-label="Search"
-    value={searchQuery}
-    onChange={handleSearchInputChange}
-    className="search-input"
-  />
-  <SearchIcon type="submit" className="search-icon" />
-</form>
+                <input
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  value={searchQuery}
+                  onChange={handleSearchInputChange}
+                  className="search-input"
+                />
+                <SearchIcon type="submit" className="search-icon" />
+              </form>
 
             </React.Fragment>
           )}
@@ -199,7 +199,7 @@ const Navbar = () => {
               </Button>
 
               {/* Register Modal */}
-             <Modal
+              <Modal
                 open={openRegisterModal}
                 onClose={handleCloseRegisterModal}
                 aria-labelledby="modal-modal-title"
@@ -230,7 +230,7 @@ const Navbar = () => {
                   <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth className="register-modal-input" />
                   <TextField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type="password" className="register-modal-input" inputProps={{ minLength: 8, pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$' }} />
                   <TextField label="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} fullWidth className="register-modal-input" />
-                  <Button variant="contained" sx={{ mt: 3 }} style={{height:'55px', fontSize:'20px'}} fullWidth onClick={handleRegister}>
+                  <Button variant="contained" sx={{ mt: 3 }} style={{ height: '55px', fontSize: '20px' }} fullWidth onClick={handleRegister}>
                     Sign Up
                   </Button>
                 </Box>
@@ -239,14 +239,12 @@ const Navbar = () => {
           ) : (
             <React.Fragment>
               {!isAdmin() && (
-                <Link to="/cart">
                   <Button color="inherit" className="btn" style={{ color: '#fff' }}>
                     <ShoppingCartIcon fontSize="medium" className="icon" />
                     Cart (0)
                   </Button>
-                </Link>
               )}
-              <Button color="inherit" className="btn" onClick={() => {handleLogout(); navigate('/');}}>
+              <Button color="inherit" className="btn" onClick={() => { handleLogout(); navigate('/'); }}>
                 <LogoutIcon fontSize="medium" className="icon" />
                 Logout
               </Button>

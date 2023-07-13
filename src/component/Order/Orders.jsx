@@ -100,9 +100,8 @@ const CreateOrderPage = () => {
           state: '',
           zipCode: '',
         });
-        setSelectedAddress('');
-        setShowForm(false);
-        alert('Address added successfully!')
+        alert('Address added successfully! Now select address from existing addresses')
+        setShowForm(false)
       } 
        else {
         alert('Please login first to add/update address.');
@@ -163,7 +162,6 @@ const CreateOrderPage = () => {
 
 
   const handleConfirmOrder = async () => {
-    alert('Order placed successfully!');
 
     try {
       const token = localStorage.getItem('x-auth-token');
@@ -172,7 +170,9 @@ const CreateOrderPage = () => {
         alert('Please login first to place an order.');
         return;
       }
-  
+
+    alert('Order placed successfully!');
+    navigate('/products');
       const orderData = {
         product: productId,
         address: selectedAddress,
@@ -184,9 +184,7 @@ const CreateOrderPage = () => {
         },
       });
   
-      console.log('Order placed successfully:', response.data);
-      navigate('/');
-      alert('Order placed successfully!');
+      
     } catch (error) {
       console.error('Error placing order:', error);
       // Handle the error and display an appropriate message to the user
@@ -210,7 +208,7 @@ const CreateOrderPage = () => {
       </Stepper>
     
 {activeStep === 0 && product && (
-        <div className="main">
+        <div className="mains">
           <Card className="cart-card" key={product._id}>
             <Card className="cart-image">
               <img src={product.image} alt={product.name} width="100%" className="image" />
@@ -220,10 +218,7 @@ const CreateOrderPage = () => {
                 <Typography variant="h6" component="div">
                   {product.name}
                 </Typography>
-                
-                <Typography variant="h6" component="div">
-                  {productId}
-                </Typography>
+               
                 <Typography variant="body2" color="text.secondary">
                   Price: ₹{product.price}
                 </Typography>
@@ -266,7 +261,7 @@ const CreateOrderPage = () => {
       </div>
       {showForm && (
         <form className='address-form' onSubmit={handleSubmit}>
-                  <hr style={{ margin:'10px auto 15px auto', width: '100%' }}/>
+          <hr style={{ margin:'10px auto 15px auto', width: '100%' }}/>
           <TextField
             label="Name"
             name="name"
@@ -360,8 +355,8 @@ const CreateOrderPage = () => {
     </div>
   </Card>
 </div>
-<hr/>
   <div>
+  <hr width='100%'/>
     <Typography variant="h6">Address:</Typography>
     {addresses.map((addr) => {
       if (addr._id === selectedAddress) {

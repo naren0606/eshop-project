@@ -111,7 +111,7 @@ const [filteredProducts, setFilteredProducts] = useState([]);
   if (!isAuthenticated) {
     setTimeout(() => {
       navigate('/');
-    }, 2000); // Delay of 2 seconds
+    }, 2200); 
   
     return (
       <Box className='alert-box'>
