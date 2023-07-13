@@ -163,6 +163,8 @@ const CreateOrderPage = () => {
 
 
   const handleConfirmOrder = async () => {
+    alert('Order placed successfully!');
+
     try {
       const token = localStorage.getItem('x-auth-token');
   
@@ -172,7 +174,7 @@ const CreateOrderPage = () => {
       }
   
       const orderData = {
-        product: productId, // Add the productId to the orderData
+        product: productId,
         address: selectedAddress,
       };
   
