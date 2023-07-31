@@ -7,10 +7,13 @@ import Navbar from './component/Navbar/Navbar';
 import './App.css';
 import CreateOrderPage from './component/Order/Orders';
 import Login from './component/Login/Login';
+import NotFound from './component/NotFound/NotFound';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Profile from './component/Profile';
+
 
 export default function App() {
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-
 
   const handleOpenLoginModal = () => {
     setIsLoginModalOpen(true);
@@ -21,20 +24,20 @@ export default function App() {
   };
 
 
-
-
   return (
     <div className="app">
       <BrowserRouter>
-        <Navbar handleOpenLoginModal={handleOpenLoginModal} />
+      <Navbar handleOpenLoginModal={handleOpenLoginModal} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/products" element={<ProductsPage  />} />
+          <Route path="/profile" element={<Profile />} />
           <Route
             path="/product-details/:productId"
             element={<ProductDetails/>}
           />
           <Route path="/place-order" element={  <CreateOrderPage />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
 

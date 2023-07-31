@@ -3,18 +3,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
+import Badge from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import Icon from '@mui/material/IconButton';
+import Divider from '@mui/material/Divider';
 import SearchIcon from '@mui/icons-material/Search';
 import Stack from '@mui/material/Stack';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import LogoutIcon from '@mui/icons-material/Logout';
+import Drawer from '@mui/material/Drawer';
 import HomeIcon from '@mui/icons-material/Home';
 import LoginIcon from '@mui/icons-material/Login';
-import { Modal, Box, Typography, TextField, Button } from '@mui/material';
+import { Modal, Box, Typography, TextField, Button, MenuItem, Menu, Avatar } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import './Navbar.css';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from '../Login/Login';
+import { LogOutIcon, UserCircle2 } from 'lucide-react';
+import { X } from 'lucide-react';
+
 
 const Navbar = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
@@ -26,10 +33,19 @@ const Navbar = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const [contactNumber, setContactNumber] = useState('');
-  const location = useLocation();
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+      right: -3,
+      top: 13,
+      padding: '0 4px',
+    },
+  }));
 
 
   const isAdmin = () => {
@@ -89,6 +105,11 @@ const Navbar = () => {
   const handleLogout = () => {
     localStorage.setItem('isAuthenticated', 'false');
     navigate('/');
+    setSidebarOpen(false);
+  };
+
+  const handleSidebarToggle = () => {
+    setOpenDrawer(!openDrawer);
   };
 
 
@@ -107,6 +128,14 @@ const Navbar = () => {
 
 
 
+  const handleSidebarClose = () => {
+    setSidebarOpen(false);
+  };
+
+  const handleSidebarLinkClick = () => {
+    setSidebarOpen(false);
+  };
+
 
   return (
     <AppBar position="static" color="primary" style={{ zIndex: 999, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.2)', backgroundColor: '#3f51b5' }}>
@@ -121,7 +150,6 @@ const Navbar = () => {
               <Link to="/">
                 <Button color="#fff" className="btn">
                   <HomeIcon fontSize="medium" className="btn" />
-                  Home
                 </Button>
               </Link>
               <Link to="/products">
@@ -155,8 +183,7 @@ const Navbar = () => {
             <React.Fragment>
               <Link to="/">
                 <Button color="inherit" className="btn" style={{ color: '#fff' }}>
-                  <HomeIcon fontSize="medium" className="icon" />
-                  Home
+                  <HomeIcon fontSize="medium" className="home" />
                 </Button>
               </Link>
               <Link to="/products">
@@ -225,11 +252,11 @@ const Navbar = () => {
                     Register
                   </Typography>
                   <hr className="divider" />
-                  <TextField label="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} fullWidth className="register-modal-input" />
-                  <TextField label="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} fullWidth className="register-modal-input" />
-                  <TextField label="Email" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth className="register-modal-input" />
-                  <TextField label="Password" value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type="password" className="register-modal-input" inputProps={{ minLength: 8, pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$' }} />
-                  <TextField label="Contact Number" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} fullWidth className="register-modal-input" />
+                  <TextField label="First Name" variant="standard" value={firstName} onChange={(e) => setFirstName(e.target.value)} fullWidth className="register-modal-input" />
+                  <TextField label="Last Name" variant="standard" value={lastName} onChange={(e) => setLastName(e.target.value)} fullWidth className="register-modal-input" />
+                  <TextField label="Email" variant="standard" value={email} onChange={(e) => setEmail(e.target.value)} fullWidth className="register-modal-input" />
+                  <TextField label="Password" variant="standard" value={password} onChange={(e) => setPassword(e.target.value)} fullWidth type="password" className="register-modal-input" inputProps={{ minLength: 8, pattern: '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$' }} />
+                  <TextField label="Contact Number" variant="standard" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} fullWidth className="register-modal-input" />
                   <Button variant="contained" sx={{ mt: 3 }} style={{ height: '55px', fontSize: '20px' }} fullWidth onClick={handleRegister}>
                     Sign Up
                   </Button>
@@ -237,23 +264,62 @@ const Navbar = () => {
               </Modal>
             </React.Fragment>
           ) : (
-            <React.Fragment>
+            <>
+
+
               {!isAdmin() && (
-                  <Button color="inherit" className="btn" style={{ color: '#fff' }}>
-                    <ShoppingCartIcon fontSize="medium" className="icon" />
-                    Cart (0)
-                  </Button>
-              )}
-              <Button color="inherit" className="btn" onClick={() => { handleLogout(); navigate('/'); }}>
-                <LogoutIcon fontSize="medium" className="icon" />
-                Logout
+                <Button className="btn cart-btn" style={{ display: 'flex', alignItems: 'center', color:'white' }}>
+                <Icon aria-label="cart" style={{padding:' 0px 5px' }}>
+                  <StyledBadge badgeContent={6} color="secondary" >
+                    <ShoppingCartIcon fontSize='medium' style={{color:'white',padding:'0' }}  className='cart'/>
+                  </StyledBadge>
+                </Icon>
+                <Typography style={{ marginLeft: '12px'}}>Cart</Typography>
               </Button>
-            </React.Fragment>
+              
+              )}
+              <div className="profile" onClick={handleSidebarToggle}>
+                <UserCircle2 size={28} style={{ marginRight: '10px' }} />
+                <Typography variant="body1">
+                  Hello, Username
+                </Typography>
+                <Drawer
+                  anchor="right"
+                  open={openDrawer}
+                  onClose={handleSidebarClose}
+                >
+                  <Box className="sidebar-content" style={{ width: '300px', padding:'15px 10px 10px 10px'}} >
+                    <Button onClick={handleSidebarClose} className="sidebar-close-btn">
+                      <X color="#696969" />
+                    </Button>
+                    <Typography style={{ fontWeight: 'bold', padding: '5px 10px 10px 10px' }}>Your Account</Typography>
+                    <Divider variant="middle" style={{ backgroundColor: '#5c5c5c', margin:'5px' }} />
+           <MenuItem>
+                      <Link to="/profile" className="sidebar-link" onClick={handleSidebarLinkClick}>
+                        Your Profile
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link to="/orders-history" className="sidebar-link" onClick={handleSidebarLinkClick}>
+                        Orders History
+                      </Link>
+                    </MenuItem>
+                    <MenuItem className="sidebar-logout-btn" onClick={handleLogout}>
+                      <LogOutIcon size={18} className="logout-logo" style={{ marginRight: '10px' }} />
+                      <Typography>Logout</Typography>
+                    </MenuItem>
+                  </Box>
+                </Drawer>
+              </div>
+            </>
           )}
         </Stack>
       </Toolbar>
+      
     </AppBar>
   );
 };
 
 export default Navbar;
+
+

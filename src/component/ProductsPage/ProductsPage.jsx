@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 import ToggleButton from '@mui/material/ToggleButton';
 import Button from '@mui/material/Button';
@@ -16,13 +16,11 @@ import './ProductsPage.css';
 const ProductsPage = () => {
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
   const navigate=useNavigate();
-  const location=useLocation();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [sortingOption, setSortingOption] = useState('default');
   const [loading, setLoading] = useState(true);
-const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     // Fetch the products data
@@ -32,7 +30,7 @@ const [filteredProducts, setFilteredProducts] = useState([]);
         setProducts(data);
         setTimeout(() => {
           setLoading(false);
-        }, 1000);
+        }, 1500);
       })
       .catch((error) => {
         console.error('Error fetching products:', error);
@@ -163,10 +161,10 @@ const [filteredProducts, setFilteredProducts] = useState([]);
     {[...Array(6)].map((_, index) => (
       <Grid item xs={12} sm={6} md={4} lg={4} key={index}>
         <Card sx={{ height: '370px' }}>
-          <Skeleton height={1} />
+          <Skeleton animation="wave" height={1} />
           <Box p={2}>
-            <Skeleton height={10} />
-            <Skeleton height={10} width="60%" />
+            <Skeleton animation="wave" height={10} />
+            <Skeleton animation="wave" height={10} width="60%" />
           </Box>
         </Card>
       </Grid>

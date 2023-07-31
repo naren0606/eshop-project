@@ -3,6 +3,7 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import './Home.css';
 
+
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -11,6 +12,7 @@ const Home = () => {
   };
 
   return (
+    <>
     <CarouselProvider
       naturalSlideWidth={100}
       naturalSlideHeight={50}
@@ -22,6 +24,7 @@ const Home = () => {
       currentSlide={currentSlide}
       onChange={handleSlideChange}
     >
+
       <Slider>
         <Slide index={0}>
           <div className="card text-bg-dark border-0">
@@ -61,6 +64,7 @@ const Home = () => {
         </Slide>
       </Slider>
     </CarouselProvider>
+    </>
   );
 };
 

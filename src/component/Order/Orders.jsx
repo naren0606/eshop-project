@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { TextField, Button, MenuItem, Alert, Typography, Box,Stepper, Step, StepLabel,Card, CardContent} from '@mui/material';
 import { useLocation } from 'react-router-dom';
@@ -7,7 +7,6 @@ import './Order.css';
 
 const CreateOrderPage = () => {
   const [activeStep, setActiveStep] = useState(0);
-  const { productId } = useParams();
   const navigate = useNavigate();
   const [selectedAddress, setSelectedAddress] = useState('');
   const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true' || false;
@@ -173,16 +172,7 @@ const CreateOrderPage = () => {
 
     alert('Order placed successfully!');
     navigate('/products');
-      const orderData = {
-        product: productId,
-        address: selectedAddress,
-      };
   
-      const response = await axios.post('http://localhost:3001/api/v1/orders', orderData, {
-        headers: {
-          'x-auth-token': token,
-        },
-      });
   
       
     } catch (error) {

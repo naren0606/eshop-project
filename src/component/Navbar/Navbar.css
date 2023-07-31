@@ -6,9 +6,11 @@
   
   .btn{
     background: transparent;
-    padding:10px 15px !important;
+    padding:7px 15px !important;
     margin:10px !important;
-    border-radius: 40px !important;
+    text-transform: capitalize !important;
+    font-size: 20px !important;
+    border-radius: 4px !important;
     transition: transform 0.3s ease;
   }
   .btn:hover{
@@ -32,7 +34,7 @@
     border: none; 
     padding: 21px 12px;
     width: 280px !important;
-    border-radius: 50px;
+    border-radius: 5px;
     background-color: #ffffff;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
     font-size: 18px;
@@ -44,15 +46,15 @@
   
   .search-icon{
     background-color: #838383;
-    height:28px !important;
+    margin: 0 0 0 -42px !important;
+    width: 42px !important;
+    height: 42px !important;
     align-items: center;
     color:#fff;
     margin: 0 0 0 -43px;
     cursor: pointer;
     padding: 7px;
-    border-radius: 50%;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
-  
+    border-radius: 0px 5px 5px 0px;
   }
   
   .modal-input{
@@ -71,3 +73,97 @@
     padding:0px 0px !important;
     height:55px !important;
   }
+
+
+
+
+.profile {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  padding:12px 15px;
+  margin-right: 50px !important;
+  border-radius: 3px;
+  position: relative;
+  border: 1px solid rgb(63, 81, 181);
+}
+
+.profile:hover {
+border:1px solid #fff;
+}
+
+.profile .arrow-icon {
+  transition: 0.3s;
+}
+
+.profile.up .arrow-icon {
+  transform: rotate(-180deg);
+}
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 280px;
+  padding: 20px 10px;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  height: 380px;
+  border-radius: 0px 0px 0px 8px;
+}
+
+
+.sidebar-close-btn{
+  position: absolute !important;
+  top:22px;
+  right:10px;
+}
+.sidebar-close-btn:hover{
+  background-color: none;
+}
+
+.menu-divider{
+  width: 92%;
+  margin:5px;
+}
+
+.sidebar-link {
+  display: block;
+  padding: 5px 0;
+  margin: 5px 10px;
+  color: #000;
+  text-decoration: none;
+}
+
+.sidebar-logout-btn{
+  padding: 10px 15px !important;
+  margin: 8px 10px  !important;
+  color: #000;
+  border-radius: 3px !important;
+  background: #cccccc !important;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;;
+}
+
+.sidebar-logout-btn:hover{
+  color: #fff;
+  background: #000000 !important;
+}
+
+.logout-logo{
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar-logout-btn:hover> .logout-logo{
+  transform: scale(1.5);
+}
+
+.sidebar-link:hover {
+  color: #3f51b5;
+}
+
+.cart-btn:hover .cart{
+  color: #3f51b5 !important;
+}
