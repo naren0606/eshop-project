@@ -1,3 +1,8 @@
+This is just the frontend file, the backend of the project is on https://github.com/naren0606/eshop-backend
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
