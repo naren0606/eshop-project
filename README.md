@@ -1,3 +1,18 @@
+<div align="left">
+  <h2>Image Gallery</h2>
+  <p>Here are some images:</p>
+  <img src="image1.jpg" width="200" alt="Image 1">
+  <img src="image2.jpg" width="200" alt="Image 2">
+  <img src="image3.jpg" width="200" alt="Image 3">
+  <img src="image1.jpg" width="200" alt="Image 1">
+  <img src="image2.jpg" width="200" alt="Image 2">
+  <img src="image3.jpg" width="200" alt="Image 3">
+</div>
+
+
+
+
+
 This is just the frontend file, the backend of the project is on https://github.com/naren0606/eshop-backend
 
 
